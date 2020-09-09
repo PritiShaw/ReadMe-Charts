@@ -1,0 +1,13 @@
+{
+  "name": "readme-charts",
+  "builds": [
+    { "src": "/v1/*.py", "use": "@vercel/python" }
+  ],
+  "routes": [
+    { 
+        "src": "/(.*)", 
+        "status": 200,
+        "dest": "/v1/main.py" 
+    }
+  ]
+}
