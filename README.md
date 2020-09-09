@@ -1,6 +1,6 @@
 ReadMe Charts
 ---
-Add Realtime charts from CSV to your README files
+Add Charts from CSV to your README files
 
 **Supported File Formats** : *CSV* , *TSV*  
 **Supported Charts** : *Line*, others to be added  
