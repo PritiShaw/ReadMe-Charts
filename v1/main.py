@@ -1,5 +1,6 @@
 from http.server import BaseHTTPRequestHandler
 from datetime import datetime
+import urllib.request
 from urllib.parse import parse_qs, quote
 import base64
 import io
@@ -14,13 +15,37 @@ class handler(BaseHTTPRequestHandler):
         path = self.path
         params = parse_qs(path[2:])
         if "src" not in params:
-            self.send_response(404)
+            self.send_response(200)
+            self.end_headers()
+            with urllib.request.urlopen('https://pritishaw.github.io/ReadMe-Charts/') as response:
+                self.wfile.write(response.read())
         else:
             try:
-                df = pd.read_csv(params["src"][0])
+                df = pd.read_csv(params["src"][0])                
+
+                if "dark" in params:
+                    plt.style.use('dark_background')
+                else:
+                    plt.style.use('default')
                 plt.figure()
-                df.plot()
-                plt.legend(loc='best')
+
+                x_min= x_max= y_min= y_max = None
+
+                if "xmin" in params:
+                    x_min = int(params["xmin"][0])
+                if "xmax" in params:
+                    x_max = int(params["xmax"][0])
+                if "ymin" in params:
+                    y_min = int(params["ymin"][0])
+                if "ymax" in params:
+                    y_max = int(params["ymax"][0])
+
+                if "legend" not in params:
+                    df.plot(ylim=[y_min, y_max], xlim=[x_min, x_max], legend=None)
+                else:
+                    df.plot(ylim=[y_min, y_max], xlim=[x_min, x_max])
+                    plt.legend(loc='best')
+                
                 if "title" in params:
                     plt.title(params["title"][0])
                 if "x" in params:
@@ -30,15 +55,18 @@ class handler(BaseHTTPRequestHandler):
 
                 fig = plt.gcf()
                 buf = io.BytesIO()
-                fig.savefig(buf, format='svg')
+                type = "svg"
+                if "type" in params:
+                    type = params["type"][0]
+                fig.savefig(buf, format=type)
                 buf.seek(0)
 
                 self.send_response(200)
-                self.send_header('Content-type', 'image/svg+xml')
+                self.send_header('Content-type', 'image/svg+xml' if type=="svg" else f"image/{type}")
                 self.end_headers()
                 self.wfile.write(buf.read())
             except Exception as err:
-                self.send_response(502)
+                self.send_response(403)
                 self.end_headers()
                 self.wfile.write(f"Failed to render: {err}".encode())
         return
