@@ -22,6 +22,7 @@ title| Title of the Chart
 legend | Show Legend, `legend=1` for showing, dont give `legend` param if you dont want legend
 x | XAxis Label
 y | YAxis Label
+type | Default: SVG , Specify Output format from svg, png, pdf, jpeg, jpg, eps, pgf, ps, raw, rgba, svgz, tif, tiff
 xmin | X minimum threshold
 xmax | X maximum threshold
 ymin | Y minimum threshold
@@ -31,15 +32,15 @@ dark | `dark=1` will render in dark, dont give `dark` param if you need light th
 ### Examples
 
 **Sine Curve**  
-`https://readmecharts.vercel.app/?src=https://gist.githubusercontent.com/PritiShaw/f4a75e117ba41f4f779732387147142f/raw/061f8d6385f01a32c04172e73fa866392d138698/sine.csv&dark=1`  
-![](https://readmecharts.vercel.app/?src=https://gist.githubusercontent.com/PritiShaw/f4a75e117ba41f4f779732387147142f/raw/061f8d6385f01a32c04172e73fa866392d138698/sine.csv&dark=1&legend=1)
+`https://readmecharts.vercel.app/?src=https://gist.githubusercontent.com/PritiShaw/f4a75e117ba41f4f779732387147142f/raw/061f8d6385f01a32c04172e73fa866392d138698/sine.csv`  
+![](https://readmecharts.vercel.app/?src=https://gist.githubusercontent.com/PritiShaw/f4a75e117ba41f4f779732387147142f/raw/061f8d6385f01a32c04172e73fa866392d138698/sine.csv)
 
 **Using Realtime data***
 
 **COVID-19 Cases in India**
 
-`https://readmecharts.vercel.app/?src=https://api.covid19india.org/csv/latest/case_time_series.csv&title=COVID-19%20Cases%20in%20India&x=Days`  
-![](https://readmecharts.vercel.app/?src=https://api.covid19india.org/csv/latest/case_time_series.csv&title=COVID-19%20Cases%20in%20India&x=Days&legend=1)   
+`https://readmecharts.vercel.app/?src=https://api.covid19india.org/csv/latest/case_time_series.csv&title=COVID-19%20Cases%20in%20India&x=Days&legend=1&dark=1`  
+![](https://readmecharts.vercel.app/?src=https://api.covid19india.org/csv/latest/case_time_series.csv&title=COVID-19%20Cases%20in%20India&x=Days&legend=1&dark=1)   
 
 **COVID-19 Cases in USA**  
 `https://readmecharts.vercel.app/?src=https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv&x=Days&title=COVID-19%20Cases%20in%20USA&legend=1`  
